@@ -1407,3 +1407,13 @@ def resonant_secular_contribution_dictionary(j,k,Nmin,Nmax,G,mIn,mOut,MIn,MOut,L
         all_dicts.append(dres)
     
     return _add_dicts(*all_dicts)
+
+###################################################################################
+
+def R_E(j1,j2,j3,j4,j5,j6):
+    a_i,e_i,s_i,omega_i,Omega_i,lambda_i,i_i = sy.symbols('a_i,e_i,s_i,omega_i,Omega_i,lambda_i,i_i')
+    R_E = 0 
+    for x in range(0,max(j1,j2,j3,j4,j5,j6):
+        R_E += cos(j1*lambda_j + j2*lambda_i+j3*varpi_j+j4*varpi_i+j5*Omega_j+j6*Omega_i)
+    return R_E
+    
