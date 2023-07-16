@@ -1410,11 +1410,22 @@ def resonant_secular_contribution_dictionary(j,k,Nmin,Nmax,G,mIn,mOut,MIn,MOut,L
 
 ###################################################################################
 
-def R_E(j1,j2,j3,j4,j5,j6):
-    e_i,s_i,varpi_i,Omega_i,lambda_i = sy.symbols('a_i,e_i,s_i,varpi_i,Omega_i,lambda_i,i_i')
-    e_j,s_j,varpi_j,Omega_j,lambda_j = sy.symbols('a_j,e_j,s_j,varpi_j,Omega_j,lambda_j,i_j')
-    R_E = 0 
-    for x in range(0,max(j1,j2,j3,j4,j5,j6):
-        R_E += s_i**j6*s_j**j5*e_i**j4*e_j**j3*cos(j1*lambda_j + j2*lambda_i+j3*varpi_j+j4*varpi_i+j5*Omega_j+j6*Omega_i)
-    return R_E
+def coef_E(j1,j2,j3,j4,j5,j6,nu1,nu2,nu3,nu4):
+    m = j1+j3+j5
+    if m != 0 and m != 1:
+        return 0
+    if int((j2+j4+1)/2)-(j2+j4+1)/2 == 0:
+        p = int((j2+j4+1)/2)
+    else:
+        return 0
+    if int((j1+j3-1)/2)-(j1+j3-1)/2 == 0:
+        p_j = int((j1+j3-1)/2)
+    else:
+        return 0
+    if m == 0:
+        k = 1
+    else:
+        k = 2
+    coef_E = -k*math.factorial(1-m)/math.factorial(1+m)*df.KaulaF(1,m,p,nu1)*df.KaulaF(1,m,p_j,nu2)*df.HansenCoefficient_term(1,-j2-j4,-j2,nu3)*df.HansenCoefficient_term(-2,j1+j3,j1,nu4)
+    return coef_E
     
